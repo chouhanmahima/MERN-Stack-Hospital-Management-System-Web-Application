@@ -8,6 +8,7 @@ const dbConnection = require("./database/dbConnection");
 const messageRouter = require("./routers/messageRouter");
 const {errorMiddleware} = require("./middlewares/error");
 const userRouter = require("./routers/userRouter");
+const appointmentRouter = require("./routers/appointmentRouter");
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(fileUpload({
 // Route
 app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/appointment", appointmentRouter)
 
 dbConnection();
 

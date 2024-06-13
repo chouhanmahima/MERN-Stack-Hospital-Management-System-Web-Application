@@ -11,6 +11,7 @@ const isAdminAuthenticated = catchAsyncError(async (req, res, next) => {
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     req.user = await userModel.findById(decoded.id);
+    // authorization
     if(req.user.role !== "Admin"){
         return next(new ErrorHandler(`${req.user.role} not authorized for this resources!`, 403));
     }
@@ -27,6 +28,7 @@ const isPatientAuthenticated = catchAsyncError(async(req, res, next) => {
 
     const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
     req.user = await userModel.findById(decode.id);
+    // authorization
     if(req.user.role !== "Patient"){
         return next(new ErrorHandler(`${req.user.role} Not Authorized for this Resourse !`, 403));
     }
