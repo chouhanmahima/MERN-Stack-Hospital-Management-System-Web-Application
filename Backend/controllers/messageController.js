@@ -1,21 +1,34 @@
 const catchAsyncError = require("../middlewares/catchAsyncError");
 const messageModel = require("../models/messageSchema");
-const {ErrorHandler} = require("../middlewares/error");
+const { ErrorHandler } = require("../middlewares/error");
 
 const sendMessage = catchAsyncError(async (req, res, next) => {
 
-    const {firstName, lastName, email, phone, message} = req.body;
+    const { firstName, lastName, email, phone, message } = req.body;
 
-    if(!firstName || !lastName || !email || !phone || !message){
+    if (!firstName || !lastName || !email || !phone || !message) {
         return next(new ErrorHandler("Please Complete all the Field", 400));
     }
 
-    await messageModel.create({firstName, lastName, email, phone, message});
+    await messageModel.create({ firstName, lastName, email, phone, message });
     res.status(200).json({
-        success : true,
-        message : "Message Sent Successfully."
+        success: true,
+        message: "Message Sent Successfully."
     });
 
-})
+});
 
-module.exports = sendMessage;
+const getAllMessages = catchAsyncError(async (req, res, next) => {
+    const messages = await messageModel.find();
+    res.status(200).json({
+        success: true,
+        messages,
+    });
+});
+
+const messageContainer = {
+    sendMessage,
+    getAllMessages,
+}
+
+module.exports = messageContainer;
