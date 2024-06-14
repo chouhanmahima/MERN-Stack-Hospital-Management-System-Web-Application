@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const isAdminAuthenticated = catchAsyncError(async (req, res, next) => {
     const token = req.cookies.adminToken;
     if(!token){
-        return next(new ErrorHandler("Admin Not Authenticated!", 400));
+        return next(new ErrorHandler("Dashboard User Not Authenticated!", 400));
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     req.user = await userModel.findById(decoded.id);
