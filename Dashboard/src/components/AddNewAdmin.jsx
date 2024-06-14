@@ -26,7 +26,7 @@ const AddNewAdmin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/user/admin/addnew", 
+        "https://mern-stack-hospital-management-system-t8is.onrender.com/api/v1/user/admin/addnew", 
         { firstName, lastName, email, phone, uid, dob, gender, password }, 
         {
           withCredentials : true, 

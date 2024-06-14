@@ -13,7 +13,7 @@ const Messages = () => {
     const fetchMessages = async() => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/v1/message/getall", 
+          "https://mern-stack-hospital-management-system-t8is.onrender.com/api/v1/message/getall", 
           {withCredentials : true}
         );
 

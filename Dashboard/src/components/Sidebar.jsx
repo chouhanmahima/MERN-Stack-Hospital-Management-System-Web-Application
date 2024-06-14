@@ -47,7 +47,7 @@ const Sidebar = () => {
   // Handle Logout
   const handleLogout = async () => {
 
-    await axios.get("http://localhost:5000/api/v1/user/admin/logout", {
+    await axios.get("https://mern-stack-hospital-management-system-t8is.onrender.com/api/v1/user/admin/logout", {
         withCredentials : true,
     }).then(res => {
         toast.success(res.data.message);
